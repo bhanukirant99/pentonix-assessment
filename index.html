@@ -81,7 +81,7 @@
             const password = document.getElementById('password').value;
 
             const data = {
-                email: email,
+                useremail: email,
                 password: password,
             };
 
@@ -95,10 +95,10 @@
                 .then(response => {
                     if (response.ok) {
                         response.json().then(data => {
-                            window.sessionStorage.setItem('jwt', data.jwt);
-                            window.localStorage.setItem('jwt', data.jwt);
+                            window.sessionStorage.setItem('jwt', data.token);
+                            window.localStorage.setItem('jwt', data.token);
                         });
-                        window.location.href = '/home.html';
+                        window.location.href = 'home.html';
                     } else {
                         response.json().then(data => {
                             alert('Error: ' + data.error);
