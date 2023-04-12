@@ -274,18 +274,15 @@
 
                 const filterOption = document.getElementById("filter");
 
-                filterOption.addEventListener("change", function(event) {
-                    selectedValue = event.target.value;
-                    console.log(selectedValue);
-
+                function applyFilter() {
                     switch (selectedValue) {
                         case 'name':
                             document.getElementById("searchInput").addEventListener("keyup", filterByName);
-                            filterByName()
+                            filterByName();
                             break;
                         case 'age':
                             document.getElementById("searchInput").addEventListener("keyup", filterByAge);
-                            filterByAge()
+                            filterByAge();
                             break;
                         case 'language':
                             document.getElementById("searchInput").addEventListener("keyup", filterByLanguage);
@@ -294,7 +291,18 @@
                         default:
                             console.log('Invalid filter option');
                     }
+                }
+
+                document.addEventListener("DOMContentLoaded", function() {
+                    applyFilter();
                 });
+
+                filterOption.addEventListener("change", function(event) {
+                    selectedValue = event.target.value;
+                    console.log(selectedValue);
+                    applyFilter();
+                });
+
 
 
                 console.log(filterOption.value)
