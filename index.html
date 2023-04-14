@@ -75,41 +75,44 @@
         const loginEndpoint = 'http://ec2-18-218-33-23.us-east-2.compute.amazonaws.com:9001/login';
 
         document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+                    e.preventDefault();
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
 
-            const data = {
-                useremail: email,
-                password: password,
-            };
+                    const data = {
+                        useremail: email,
+                        password: password,
+                    };
 
-            fetch(loginEndpoint, {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        response.json().then(data => {
-                            window.sessionStorage.setItem('jwt', data.token);
-                            window.localStorage.setItem('jwt', data.token);
+                    fetch(loginEndpoint, {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                                if (response.ok) {
+                                    response.json().then(data => {
+                                        window.sessionStorage.setItem('jwt', data.token);
+                                        window.localStorage.setItem('jwt', data.token);
+                                    });
+                                    window.location.href = 'home.html';
+                                } else {
+                                    alert('Error Logging in');
+                                    //     response.json().then(data => {
+                                    //         alert('Error: ' + data.error);
+                                    //     });
+                                    // }
+
+                                })
+                            .catch(error => {
+                                alert('Error Logging in');
+
+                                // alert('Error: ' + error.message);
+                            });
                         });
-                        window.location.href = 'home.html';
-                    } else {
-                        response.json().then(data => {
-                            alert('Error: ' + data.error);
-                        });
-                    }
-
-                })
-                .catch(error => {
-                    alert('Error: ' + error.message);
-                });
-        });
     </script>
 </body>
 
